@@ -1,7 +1,7 @@
 #!/bin/sh
 # Initialize defaults
 HOST_NAME=$HOSTNAME
-PROXY_NAME="nextcloud.domain.tld"
+DNS_NAME="nextcloud.domain.tld"
 TIME_ZONE="Europe/Vienna"
 JAIL_IP=$(ifconfig epair0b | grep inet | cut -w -f3)
 CERT_EMAIL="email@domain.tld"
@@ -58,9 +58,9 @@ cp -f ${TMP_FOLDER}/www.conf /usr/local/etc/php-fpm.d/
 cp -f ${TMP_FOLDER}/Caddyfile /usr/local/www/
 cp -f ${TMP_FOLDER}/my-system.cnf /var/db/mysql/my.cnf
 
-sed -i '' "s/yourhostnamehere/${HOST_NAME}/" /usr/local/www/Caddyfile
-sed -i '' "s/yourproxynamehere/${PROXY_NAME}/" /usr/local/www/Caddyfile
-sed -i '' "s/JAIL-IP/${JAIL_IP}/" /usr/local/www/Caddyfile
+sed -i '' "s/%%HOSTNAME%%/${HOST_NAME}/" /usr/local/www/Caddyfile
+sed -i '' "s/%%DNSNAME%%/${DNS_NAME}/" /usr/local/www/Caddyfile
+sed -i '' "s/%%IPADDRESS%%/${JAIL_IP}/" /usr/local/www/Caddyfile
 sed -i '' "s|mytimezone|${TIME_ZONE}|" /usr/local/etc/php.ini
 
 sysrc caddy_enable="YES"
@@ -104,7 +104,7 @@ su -m www -c "php /usr/local/www/nextcloud/occ config:system:set overwrite.cli.u
 su -m www -c 'php /usr/local/www/nextcloud/occ config:system:set htaccess.RewriteBase --value="/"'
 su -m www -c 'php /usr/local/www/nextcloud/occ maintenance:update:htaccess'
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 1 --value=\"${HOST_NAME}\""
-su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 2 --value=\"${PROXY_NAME}\""
+su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 2 --value=\"${DNS_NAME}\""
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${JAIL_IP}\""
 su -m www -c 'php /usr/local/www/nextcloud/occ app:enable encryption'
 su -m www -c 'php /usr/local/www/nextcloud/occ encryption:enable'
