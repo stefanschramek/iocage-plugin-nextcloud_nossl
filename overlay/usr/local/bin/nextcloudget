@@ -2,7 +2,7 @@
 
 # Get configuration setting from Nextcloud configuration file
 case $1 in
-    dns) echo `sed -n 1p /usr/local/www/Caddyfile | sed 's/\([a-z.]*\).*/\1/'`
+    dnsname) echo `sed -n 1p /usr/local/www/Caddyfile | sed 's/\([a-z.]*\).*/\1/'`
           ;;
     timezone) echo `awk -F' = ' '/^date.timezone/ { print $2 }' /usr/local/etc/php.ini`
              ;;        
