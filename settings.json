@@ -4,10 +4,10 @@
     "serviceset": "/usr/local/bin/nextcloudset",
     "options":
 	{
-		"hostname": {
+		"proxyname": {
 			"type": "string",
-			"name": "Nextcloud FQDN",
-			"description": "Hostname (FQDN) for Nextcloud",
+			"name": "Nextcloud Public FQDN",
+			"description": "Public FQD) for Nextcloud",
 			"requirerestart": true
 		},
 		"timezone": {
