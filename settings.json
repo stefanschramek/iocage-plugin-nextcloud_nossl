@@ -1,0 +1,20 @@
+{
+    "servicerestart":"service caddy restart",
+    "serviceget": "/usr/local/bin/nextcloudget",
+    "serviceset": "/usr/local/bin/nextcloudset",
+    "options":
+	{
+		"hostname": {
+			"type": "string",
+			"name": "Nextcloud FQDN",
+			"description": "Hostname (FQDN) for Nextcloud",
+			"requirerestart": true
+		},
+		"timezone": {
+			"type": "string",
+			"name": "Timezone",
+			"description": "Timezone used for Nextcloud",
+			"requirerestart": true
+		}
+	}
+}
