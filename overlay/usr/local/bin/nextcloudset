@@ -1,5 +1,5 @@
 #!/bin/sh
-HOST_NAME=$HOSTNAME
+HOST_NAME="$(hostname)"
 JAIL_IP=$(ifconfig epair0b | grep inet | cut -w -f3)
 TMP_FOLDER="/tmp/U0XfaFP10hh2lTMH"
 # Set configuration options 
