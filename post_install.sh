@@ -1,6 +1,5 @@
-#!/bin/sh
 # Initialize defaults
-HOST_NAME=$HOSTNAME
+HOST_NAME="$(hostname)"
 DNS_NAME="nextcloud.domain.tld"
 TIME_ZONE="Europe/Vienna"
 JAIL_IP=$(ifconfig epair0b | grep inet | cut -w -f3)
