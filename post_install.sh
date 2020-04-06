@@ -24,9 +24,9 @@ chmod -R 770 /mnt/files
 #####
 # Additional Dependency installation
 #####
-portsnap fetch extract
-sh -c "make -C /usr/ports/www/php73-opcache clean install BATCH=yes"
-sh -c "make -C /usr/ports/devel/php73-pcntl clean install BATCH=yes"
+portsnap fetch extract 2>/dev/null
+sh -c "make -C /usr/ports/www/php73-opcache clean install BATCH=yes" 2>/dev/null
+sh -c "make -C /usr/ports/devel/php73-pcntl clean install BATCH=yes" 2>/dev/null
 
 #####
 # Configuration and Nextcloud installation  
