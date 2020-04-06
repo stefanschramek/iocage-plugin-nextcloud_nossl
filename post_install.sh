@@ -104,7 +104,7 @@ su -m www -c "php /usr/local/www/nextcloud/occ config:system:set overwrite.cli.u
 su -m www -c 'php /usr/local/www/nextcloud/occ config:system:set htaccess.RewriteBase --value="/"'
 su -m www -c 'php /usr/local/www/nextcloud/occ maintenance:update:htaccess'
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 1 --value=\"${HOST_NAME}\""
-su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 1 --value=\"${PROXY_NAME}\""
+su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 2 --value=\"${PROXY_NAME}\""
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${JAIL_IP}\""
 su -m www -c 'php /usr/local/www/nextcloud/occ app:enable encryption'
 su -m www -c 'php /usr/local/www/nextcloud/occ encryption:enable'
