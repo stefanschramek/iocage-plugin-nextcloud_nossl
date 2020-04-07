@@ -20,8 +20,6 @@ chown -R 88:88 /var/db/mysql
 mkdir -p /usr/local/www/nextcloud/config
 #files
 mkdir -p /mnt/files
-chown -R www:www /mnt/files
-chmod -R 770 /mnt/files
 #####
 # Additional Dependency installation
 #####
