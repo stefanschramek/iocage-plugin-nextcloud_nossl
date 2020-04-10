@@ -1,6 +1,5 @@
 #!/bin/sh
 HOST_NAME="$(hostname)"
-JAIL_IP=$(ifconfig epair0b | grep inet | cut -w -f3)
 TMP_FOLDER="/tmp/U0XfaFP10hh2lTMH"
 # Set configuration options 
 give_message()
@@ -15,11 +14,11 @@ case $1 in
     dnsname) cp -f ${TMP_FOLDER}/Caddyfile /usr/local/www/
              sed -i '' "s/%%HOSTNAME%%/${HOST_NAME}/" /usr/local/www/Caddyfile
              sed -i '' "s/%%DNSNAME%%/$2/"            /usr/local/www/Caddyfile
-             sed -i '' "s/%%IPADDRESS%%/${JAIL_IP}/"  /usr/local/www/Caddyfile
+             sed -i '' "s/%%IPADDRESS%%/${IOCAGE_PLUGIN_IP}/"  /usr/local/www/Caddyfile
              su -m www -c "php /usr/local/www/nextcloud/occ config:system:set overwrite.cli.url --value=\"http://${HOST_NAME}/\""
              su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 1 --value=\"${HOST_NAME}\""
              su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 2 --value=\"$2\""
-             su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${JAIL_IP}\""
+             su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${IOCAGE_PLUGIN_IP}\""
              give_message
              ;;
     timezone) cp -f ${TMP_FOLDER}/php.ini /usr/local/etc/php.ini
