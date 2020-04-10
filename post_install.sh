@@ -2,7 +2,6 @@
 HOST_NAME="$(hostname)"
 DNS_NAME="nextcloud.domain.tld"
 TIME_ZONE="Europe/Vienna"
-JAIL_IP=$(ifconfig epair0b | grep inet | cut -w -f3)
 CERT_EMAIL="email@domain.tld"
 DB_ROOT_PASSWORD=$(openssl rand -base64 16)
 DB_PASSWORD=$(openssl rand -base64 16)
@@ -58,7 +57,7 @@ cp -f ${TMP_FOLDER}/my-system.cnf /var/db/mysql/my.cnf
 
 sed -i '' "s/%%HOSTNAME%%/${HOST_NAME}/" /usr/local/www/Caddyfile
 sed -i '' "s/%%DNSNAME%%/${DNS_NAME}/" /usr/local/www/Caddyfile
-sed -i '' "s/%%IPADDRESS%%/${JAIL_IP}/" /usr/local/www/Caddyfile
+sed -i '' "s/%%IPADDRESS%%/${IOCAGE_PLUGIN_IP}/" /usr/local/www/Caddyfile
 sed -i '' "s|mytimezone|${TIME_ZONE}|" /usr/local/etc/php.ini
 
 sysrc caddy_enable="YES"
@@ -104,7 +103,7 @@ su -m www -c 'php /usr/local/www/nextcloud/occ config:system:set htaccess.Rewrit
 su -m www -c 'php /usr/local/www/nextcloud/occ maintenance:update:htaccess'
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 1 --value=\"${HOST_NAME}\""
 su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 2 --value=\"${DNS_NAME}\""
-su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${JAIL_IP}\""
+su -m www -c "php /usr/local/www/nextcloud/occ config:system:set trusted_domains 3 --value=\"${IOCAGE_PLUGIN_IP}\""
 su -m www -c 'php /usr/local/www/nextcloud/occ app:enable encryption'
 su -m www -c 'php /usr/local/www/nextcloud/occ encryption:enable'
 su -m www -c 'php /usr/local/www/nextcloud/occ encryption:disable'
